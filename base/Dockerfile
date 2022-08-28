@@ -1,5 +1,4 @@
-FROM debian:stretch
-MAINTAINER Jesse Rosenberger
+FROM debian:bullseye-slim
 
 ENV METEORD_DIR /opt/meteord
 COPY scripts $METEORD_DIR
