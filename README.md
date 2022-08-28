@@ -1,4 +1,4 @@
-[![Circle CI](https://circleci.com/gh/abernix/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/abernix/meteord/tree/master)
+[![Circle CI](https://circleci.com/gh/qnipp/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/qnipp/meteord/tree/master)
 
 # MeteorD - Docker image for MUP
 
@@ -27,7 +27,7 @@ Please see the explanation of the [tag variations](#tag-variations) (e.g. `-binb
 
 ### Older Node versions
 
-For brevity, not all possibilities are listed above and there are many more available.  It's recommended that you use the latest version within the series which your Meteor was designed for (see titles above).  The most recent version will be tagged with a `node-x-*` tag accordingly.  For the full list, please see the ["Tags" tab](https://hub.docker.com/r/abernix/meteord/tags/) above.
+For brevity, not all possibilities are listed above and there are many more available.  It's recommended that you use the latest version within the series which your Meteor was designed for (see titles above).  The most recent version will be tagged with a `node-x-*` tag accordingly.  For the full list, please see the ["Tags" tab](https://hub.docker.com/r/qnipp/meteord/tags/) above.
 
 ## Tag Variations
 
@@ -50,12 +50,12 @@ There are two main ways you can use Docker with Meteor apps. They are:
 
 With this method, your app will be converted into a Docker image. Then you can simply run that image.
 
-For that, you can use `abernix/meteord:onbuild` as your base image. Magically, that's only thing you have to do. Here's how to do it:
+For that, you can use `qnipp/meteord:onbuild` as your base image. Magically, that's only thing you have to do. Here's how to do it:
 
 Add following `Dockerfile` into the root of your app:
 
 ~~~shell
-FROM abernix/meteord:onbuild
+FROM qnipp/meteord:onbuild
 ~~~
 
 Then you can build the docker image with:
@@ -80,7 +80,7 @@ Then you can access your app from the port 8080 of the host system.
 
 So, with the above method, MeteorD will download and install Meteor each and every time. That's bad especially in development. So, we've a solution for that. Simply use `aberaber/meteord:devbuild` as your base image.
 
-> WARNING: Don't use `abernix/meteord:devbuild` for your final build. If you used it, your image will carry the Meteor distribution as well. As a result of that, you'll end up with an image with ~700 MB.
+> WARNING: Don't use `qnipp/meteord:devbuild` for your final build. If you used it, your image will carry the Meteor distribution as well. As a result of that, you'll end up with an image with ~700 MB.
 
 ### 2. Running a Meteor bundle with Docker
 
@@ -95,7 +95,7 @@ docker run -d \
     -e MONGO_OPLOG_URL=mongodb://oplog_url \
     -v /mybundle_dir:/bundle \
     -p 8080:80 \
-    abernix/meteord:base
+    qnipp/meteord:base
 ~~~
 
 With this method, MeteorD looks for the tarball version of the meteor bundle. So, you should build the meteor bundle for `os.linux.x86_64` and put it inside the `/bundle` volume. This is how you can build a meteor bundle.
@@ -115,7 +115,7 @@ docker run -d \
     -e MONGO_OPLOG_URL=mongodb://oplog_url \
     -e BUNDLE_URL=http://mybundle_url_at_s3.tar.gz \
     -p 8080:80 \
-    abernix/meteord:base
+    qnipp/meteord:base
 ~~~
 
 #### 2.2 With Docker Compose
@@ -153,5 +153,5 @@ docker run -d \
     -e BUNDLE_URL=http://mybundle_url_at_s3.tar.gz \
     -e REBUILD_NPM_MODULES=1 \
     -p 8080:80 \
-    abernix/meteord:binbuild
+    qnipp/meteord:binbuild
 ~~~
